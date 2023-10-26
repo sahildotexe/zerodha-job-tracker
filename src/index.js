@@ -20,6 +20,7 @@ app.get('/scrape', async (req, res) => {
             jobPostings.push(h3Content);
         }
       });
+      
       res.json({ jobPostings });
     } catch (error) {
       res.status(500).json({ error: error.message });
