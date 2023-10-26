@@ -15,22 +15,22 @@ app.get("/scrape", async (req, res) => {
     const urlToScrape = "https://careers.zerodha.com/";
     const response = await axios.get(urlToScrape);
     const $ = cheerio.load(response.data);
-    const my5Divs = $("div.result");
-    const jobPostings = [];
+    const targetDiv = $("div.result");
+    const jobOpenings = [];
     const keywordsToCheck = ["developer", "engineer", "SDE"];
 
-    my5Divs.each((index, element) => {
-      const h3Content = $(element).find("h3").text();
+    targetDiv.each((index, element) => {
+      const jobTitle = $(element).find("h3").text();
       if (
         keywordsToCheck.some((keyword) =>
-          h3Content.toLowerCase().includes(keyword.toLowerCase())
+          jobTitle.toLowerCase().includes(keyword.toLowerCase())
         )
       ) {
-        jobPostings.push(h3Content);
+        jobOpenings.push(jobTitle);
       }
     });
 
-    if (jobPostings.length > 0) {
+    if (jobOpenings.length > 0) {
       await resend.emails.send({
         from: "Zerodha-Job-Tracker <onboarding@resend.dev>",
         to: ["sahilkaling@gmail.com"],
@@ -39,7 +39,7 @@ app.get("/scrape", async (req, res) => {
       });
     }
 
-    res.json({ jobPostings });
+    res.json({ jobOpenings });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
