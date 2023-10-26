@@ -33,7 +33,7 @@ app.get("/scrape", async (req, res) => {
     if (jobOpenings.length > 0) {
       await resend.emails.send({
         from: "Zerodha-Job-Tracker <onboarding@resend.dev>",
-        to: ["sahilkaling@gmail.com"],
+        to: [process.env.MY_EMAIL],
         subject: "Yoo Zerodha has new job openings!",
         text: "Check out the new job openings at Zerodha: https://careers.zerodha.com/",
       });
