@@ -1,8 +1,8 @@
-import express from "express";
-import axios from "axios";
-import cheerio from "cheerio";
-import { Resend } from "resend";
-import dotenv from "dotenv";
+const express = require("express");
+const axios = require("axios");
+const cheerio = require("cheerio");
+const dotenv = require("dotenv");
+const {Resend} = require("resend");
 
 dotenv.config();
 
