@@ -17,7 +17,7 @@ app.get("/scrape", async (req, res) => {
     const $ = cheerio.load(response.data);
     const my5Divs = $("div.result");
     const jobPostings = [];
-    const keywordsToCheck = ["developer", "engineer", "SDE","no"];
+    const keywordsToCheck = ["developer", "engineer", "SDE"];
 
     my5Divs.each((index, element) => {
       const h3Content = $(element).find("h3").text();
