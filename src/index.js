@@ -17,7 +17,7 @@ app.get("/scrape", async (req, res) => {
     const $ = cheerio.load(response.data);
     const targetDiv = $("div.result");
     const jobOpenings = [];
-    const keywordsToCheck = ["developer", "engineer", "SDE"];
+    const keywordsToCheck = ["developer", "engineer", "SDE", "SDET"];
 
     targetDiv.each((index, element) => {
       const jobTitle = $(element).find("h3").text();
